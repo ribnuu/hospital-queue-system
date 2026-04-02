@@ -4,6 +4,7 @@ import { Users, Clock, CheckCircle, Activity, Bell } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getAppointments, updateStatus } from '../services/api';
 import { useQueueSocket } from '../hooks/useQueueSocket';
+import Navigation from '../components/Navigation';
 
 const DEPT_COLORS = ['#06b6d4','#8b5cf6','#f59e0b','#10b981','#ef4444','#3b82f6','#ec4899'];
 const DEPARTMENTS = ['General','Cardiology','Orthopedics','Pediatrics','Neurology','Dermatology','Emergency'];
@@ -70,18 +71,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <nav className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-cyan-500 rounded-lg flex items-center justify-center">
-            <Activity size={18} className="text-white"/>
-          </div>
-          <span className="font-bold text-slate-800 text-lg">MediQueue</span>
-          <span className="text-xs bg-cyan-100 text-cyan-700 px-2 py-0.5 rounded-full">Live</span>
-        </div>
-        <div className="flex items-center gap-2 text-sm text-slate-500">
-          <Bell size={16}/> Real-time AI Queue System
-        </div>
-      </nav>
+      <Navigation />
 
       <div className="p-6 max-w-7xl mx-auto space-y-6">
 
