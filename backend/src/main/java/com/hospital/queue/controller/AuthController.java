@@ -9,6 +9,7 @@ import com.hospital.queue.security.JwtService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,10 @@ public class AuthController {
     @PostMapping("/register")
     @Operation(summary = "Register new staff user")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest req) {
+        if (userRepository.findByEmail(req.getEmail()).isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
         User user = User.builder()
             .name(req.getName())
             .email(req.getEmail())
@@ -36,7 +41,7 @@ public class AuthController {
             .build();
         userRepository.save(user);
         String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(new AuthResponse(token, user.getName(), user.getRole().name()));
+        return ResponseEntity.ok(new AuthResponse(token, user.getName(), user.getEmail(), user.getRole().name()));
     }
 
     @PostMapping("/login")
@@ -46,6 +51,6 @@ public class AuthController {
             new UsernamePasswordAuthenticationToken(req.getEmail(), req.getPassword()));
         User user = userRepository.findByEmail(req.getEmail()).orElseThrow();
         String token = jwtService.generateToken(user);
-        return ResponseEntity.ok(new AuthResponse(token, user.getName(), user.getRole().name()));
+        return ResponseEntity.ok(new AuthResponse(token, user.getName(), user.getEmail(), user.getRole().name()));
     }
 }

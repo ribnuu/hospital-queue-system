@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
-import { Users, Clock, CheckCircle, Activity, Bell } from 'lucide-react';
+import { Users, Clock, CheckCircle, Activity } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { getAppointments, updateStatus } from '../services/api';
 import { useQueueSocket } from '../hooks/useQueueSocket';

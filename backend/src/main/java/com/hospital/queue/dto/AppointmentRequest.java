@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class AppointmentRequest {
+    @NotBlank private String patientName;
     @NotBlank private String patientEmail;
     @NotBlank private String doctorName;
     @NotBlank private String department;

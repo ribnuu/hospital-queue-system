@@ -156,7 +156,7 @@ export default function Queue() {
                       <div>
                         <span className="text-slate-500">Appointment Time:</span>
                         <p className="font-semibold text-slate-700">
-                          {new Date(apt.appointmentTime).toLocaleTimeString()}
+                          {new Date(apt.scheduledTime).toLocaleTimeString()}
                         </p>
                       </div>
                       <div>

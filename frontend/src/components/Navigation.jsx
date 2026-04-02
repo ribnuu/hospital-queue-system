@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Activity, BarChart3, Users, Calendar, LogOut, User, Plus } from 'lucide-react';
+import { Activity, BarChart3, Users, Calendar, LogOut, User } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function Navigation() {
@@ -80,9 +80,9 @@ export default function Navigation() {
               <ul className="dropdown-content z-50 menu p-2 shadow bg-base-100 rounded-box w-52">
                 {navItems.map(({ path, label, icon: Icon }) => (
                   <li key={path}>
-                    <a onClick={() => navigate(path)} className={isActive(path)}>
+                    <button type="button" onClick={() => navigate(path)} className={isActive(path)}>
                       <Icon size={16}/> {label}
-                    </a>
+                    </button>
                   </li>
                 ))}
               </ul>

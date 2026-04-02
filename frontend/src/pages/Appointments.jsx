@@ -14,9 +14,9 @@ export default function Appointments() {
   const [formData, setFormData] = useState({
     patientName: '',
     patientEmail: '',
+    doctorName: '',
     department: 'General',
-    appointmentTime: new Date().toISOString().slice(0, 16),
-    notes: '',
+    scheduledTime: new Date().toISOString().slice(0, 16),
   });
 
   const fetchAppointments = async () => {
@@ -43,9 +43,9 @@ export default function Appointments() {
       setFormData({
         patientName: '',
         patientEmail: '',
+        doctorName: '',
         department: 'General',
-        appointmentTime: new Date().toISOString().slice(0, 16),
-        notes: '',
+        scheduledTime: new Date().toISOString().slice(0, 16),
       });
       await fetchAppointments();
     } catch {
@@ -113,6 +113,17 @@ export default function Appointments() {
                 />
               </div>
               <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Doctor Name</label>
+                <input
+                  type="text"
+                  required
+                  value={formData.doctorName}
+                  onChange={(e) => setFormData({ ...formData, doctorName: e.target.value })}
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:outline-none"
+                  placeholder="Dr. Smith"
+                />
+              </div>
+              <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">Department</label>
                 <select
                   value={formData.department}
@@ -127,19 +138,9 @@ export default function Appointments() {
                 <input
                   type="datetime-local"
                   required
-                  value={formData.appointmentTime}
-                  onChange={(e) => setFormData({ ...formData, appointmentTime: e.target.value })}
+                  value={formData.scheduledTime}
+                  onChange={(e) => setFormData({ ...formData, scheduledTime: e.target.value })}
                   className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:outline-none"
-                />
-              </div>
-              <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-slate-700 mb-2">Notes</label>
-                <textarea
-                  value={formData.notes}
-                  onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-cyan-400 focus:outline-none"
-                  rows="3"
-                  placeholder="Patient notes..."
                 />
               </div>
               <div className="md:col-span-2 flex gap-2">
@@ -193,7 +194,7 @@ export default function Appointments() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-700">{apt.department}</td>
-                      <td className="px-6 py-4 text-sm text-slate-700">{new Date(apt.appointmentTime).toLocaleString()}</td>
+                      <td className="px-6 py-4 text-sm text-slate-700">{new Date(apt.scheduledTime).toLocaleString()}</td>
                       <td className="px-6 py-4">
                         <select
                           value={apt.status}

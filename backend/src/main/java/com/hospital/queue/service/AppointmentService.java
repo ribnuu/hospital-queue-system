@@ -27,7 +27,10 @@ public class AppointmentService {
     @Transactional
     public AppointmentResponse book(AppointmentRequest req) {
         Patient patient = patientRepository.findByEmail(req.getPatientEmail())
-            .orElseThrow(() -> new RuntimeException("Patient not found"));
+            .orElseGet(() -> patientRepository.save(Patient.builder()
+                .name(req.getPatientName())
+                .email(req.getPatientEmail())
+                .build()));
 
         // AI: predict wait time before saving
         int predicted = waitTimePredictorService.predict(req.getDepartment(), req.getScheduledTime());

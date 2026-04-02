@@ -57,7 +57,7 @@ When a patient **checks in**, the system re-runs the prediction and sends a pers
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Java 17+, Maven 3.8+
+- Java 21+, Maven 3.8+
 - Node.js 18+
 - PostgreSQL 15
 
@@ -66,8 +66,8 @@ When a patient **checks in**, the system re-runs the prediction and sends a pers
 cd backend
 # Update DB credentials in src/main/resources/application.yml
 mvn spring-boot:run
-# API running at http://localhost:8080
-# Swagger UI at http://localhost:8080/swagger-ui.html
+# API running at http://localhost:8081
+# Swagger UI at http://localhost:8081/swagger-ui.html
 ```
 
 ### Frontend
@@ -82,6 +82,21 @@ npm start
 ```bash
 docker-compose up --build
 ```
+
+Default test users (auto-seeded on backend startup):
+
+- ADMIN: `admin@hospital.com` / `password`
+- DOCTOR: `doctor@hospital.com` / `password`
+- RECEPTIONIST: `reception@hospital.com` / `password`
+
+Frontend pages:
+
+- `/login` - Sign in
+- `/register` - Create staff account
+- `/dashboard` - KPI + charts + queue actions
+- `/appointments` - Book and manage appointments
+- `/queue` - Live queue by department
+- `/profile` - User details and role permissions
 
 ---
 
